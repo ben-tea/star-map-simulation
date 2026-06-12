@@ -25,18 +25,20 @@ function magToBrightness(mag: number) {
   return Math.min(Math.max(t, 0.02), 1.0);
 }
 
-
 const geometry = new THREE.BufferGeometry();
 const skyRadius = 100;
 
 const positions: number[] = [];
 const brightnessLevels: number[] = [];
+const starIndex: number[] = [];
 
-for (const star of starData) {
-  const pos = raDectoPosition(star.ra, star.dec, skyRadius);
+//takes all star data and adds to geometry
+for (let i = 0; i < starData.length; i++) {
+  const pos = raDectoPosition(starData[i].ra, starData[i].dec, skyRadius);
 
   positions.push(pos.x, pos.y, pos.z);
-  brightnessLevels.push(magToBrightness(star.magnitude));
+  brightnessLevels.push(magToBrightness(starData[i].magnitude));
+  starIndex.push(i);
 }
 
 geometry.setAttribute(
@@ -49,8 +51,18 @@ geometry.setAttribute(
   new THREE.BufferAttribute(new Float32Array(brightnessLevels), 1)
 );
 
-const material = new THREE.ShaderMaterial({
+geometry.setAttribute(
+  "starIndex",
+  new THREE.BufferAttribute(new Float32Array(starIndex), 1)
+)
+
+export const material = new THREE.ShaderMaterial({
+  uniforms: {
+    selectedIndex: {value : -1}
+  },
   vertexShader: `
+    attribute float starIndex;
+    uniform float selectedIndex;
     attribute float brightness;
     varying float vBrightness;
 
@@ -60,8 +72,12 @@ const material = new THREE.ShaderMaterial({
       float b = max(vBrightness, 0.15);
       float size = 5.0 + b * 5.0;
 
+      if (abs(starIndex - selectedIndex) < 0.1){ size = size * 2.0; }
+
       gl_PointSize = size;
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
+      
     }
   `,
   fragmentShader: `

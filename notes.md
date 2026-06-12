@@ -27,9 +27,35 @@
 
 - Math.min(Math.max(t,0),1); is called clamping. Basically once normalization occurs, if the og mag is bigger than the boundaries, the number outputted will be outside the range [0,1], so clamping caps it at 0 or 1
 
-- BufferAttribute can take a simplified, or "GPU Ready" array  for the GPU to process. It can split the array into sets of numbers. 
-- a Float32Array is created because its more process-friendly (?)
+- geometry.setAttribute(...) uploads an array of numbers to the GPU for rendering
+    - BufferGeometry is just a collection of arrays stored in GPU-friendly format
+    - Float32Array(arr) converts CPU arrays (normal arrays) into GPU data
+
+    - ShaderMaterial gives the GPU custom data for rendering
+        - the properties it takes are apart of GLSL, which a GPU language.
+        - setAttribute(...) imports custom variables to use for processing the shader (used by 'attribute' variables)
+
+        - uniform variables are passed through material.uniforms.selectedIndex.value = ...
+            - the uniforms: {...} variable for ShaderMaterial is used to upload any uniform variables inside it so the GPU can use it
+            - GPU reads "uniform float selectedIndex" and now every pixel can access the variable
+            - selectedIndex is needed as a uniform variable so it can be used to compare each star without changing
+
+        - 3 parts (for now)
+            - uniforms: global inputs 
+            - vertexShader: generates data on a per-point (or per star) basis, deciding position, size, etc.
+            - fragmentShader: generates data on a per-pixel basis; we use this to calculate stuff lke color, brightness, transparency, of each star.
+
+        - each frame, void main() runs per vertex and per pixel to refresh the graphics
+
+        - syntax:
+            - "attribute" float brightness: attribute is a variable that may change per vertex
+            - "uniform" float brightness: a variable that is the same for each vertex generated
+            - "varying" float vBrightness: is a variable that is generated on the vertex level. then the GPU interpolates a value per pixel and smooths it out
+            - gl_Position/gl_PointSize is a built-in variable that defines position
+                - the math for gl_Position don't need to worry
+
+        
+            
 
 
-- ShaderMaterial: the properties it takes are apart of GLSL, which is a language for shaders. Im lowk not gonna understand ts
 

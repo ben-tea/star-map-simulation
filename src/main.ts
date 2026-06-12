@@ -1,13 +1,15 @@
+import "./style.css"
 import * as THREE from "three";
 import { scene, camera, renderer, controls } from "./assets/scene";
-import { starField } from "./assets/stars";
+import { starField, material } from "./assets/stars";
 
 scene.add(starField);
 let isDragging = false;
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
-raycaster.params.Points.threshold = 1.7;
+raycaster.params.Points.threshold = 2;
 
+//doesnt count dragging as clicking
 controls.addEventListener("start", () => {
   isDragging = false;
 });
@@ -16,6 +18,7 @@ controls.addEventListener("change", () => {
   isDragging = true;
 });
 
+//checks if clicks star
 window.addEventListener("click", (event) => {
   if (isDragging) return;
 
@@ -24,10 +27,14 @@ window.addEventListener("click", (event) => {
 
   raycaster.setFromCamera(mouse, camera);
 
-  const hits = raycaster.intersectObject(starField);
+  const intersection = raycaster.intersectObject(starField);
 
-  console.log(hits);
+  if (intersection.length > 0){
+    material.uniforms.selectedIndex.value = intersection[0]?.index;
+  }
 });
+
+
 
 function animate() {
   requestAnimationFrame(animate);
@@ -35,5 +42,7 @@ function animate() {
   controls.update();
   renderer.render(scene, camera);
 }
+
+
 
 animate();
