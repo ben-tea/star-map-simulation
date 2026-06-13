@@ -18,9 +18,9 @@ export function getSelectedStarIndex(
 
     raycaster.setFromCamera(mouse, camera);
 
-    const intersections = raycaster.intersectObject(starField);
+    const intersection = raycaster.intersectObject(starField);
 
-    if (intersections.length === 0) {return undefined;}
+    if (intersection.length === 0) {return undefined;}
 
-    return intersections[0].index;
+    return intersection[0].index;
 }

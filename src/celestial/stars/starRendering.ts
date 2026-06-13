@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { stars as starData } from "../../data/stars";
+import { stars as starData } from "../../data/hygLoader.ts";
 import { material} from "./starShaders"
 import { raDectoPosition } from "../../assets/calculations";
 
@@ -32,10 +32,11 @@ const starIndex: number[] = [];
 
 //takes all star data and adds to geometry
 for (let i = 0; i < starData.length; i++) {
-  const pos = raDectoPosition(starData[i].ra, starData[i].dec, skyRadius);
+  const star = starData[i]
+  const pos = raDectoPosition(star.ra, star.dec, skyRadius);
 
   positions.push(pos.x, pos.y, pos.z);
-  brightnessLevels.push(magToBrightness(starData[i].magnitude));
+  brightnessLevels.push(magToBrightness(star.magnitude));
   starIndex.push(i);
 }
 

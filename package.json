@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/papaparse": "^5.5.2",
     "@types/three": "^0.184.1",
     "typescript": "~6.0.2",
     "vite": "^8.0.12"
   },
   "dependencies": {
+    "papaparse": "^5.5.3",
     "three": "^0.184.0",
     "three-stdlib": "^2.36.1"
   }

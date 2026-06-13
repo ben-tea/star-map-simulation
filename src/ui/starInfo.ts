@@ -1,4 +1,4 @@
-import { stars as starData } from "../data/stars";
+import { stars as starData } from "../data/hygLoader.ts";
 import "./starInfo.css";
 
 export const textbox = document.createElement("div");
