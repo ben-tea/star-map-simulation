@@ -54,8 +54,10 @@
             - gl_Position/gl_PointSize is a built-in variable that defines position
                 - the math for gl_Position don't need to worry
 
-        
+6/12/26
+- intersection[0].index; by default outputs number | undefined, but I only want number. so .index! explicitly tells the compiler that the value is guaranteed to not be null/undef.
+    - ? on the other hand can be placed to tell the compiler that the data may be und or null        
             
-
+- raycaster.setFromCamera(mouse, camera); shoots a ray from camera to mouse position to check for collisions 
 
 

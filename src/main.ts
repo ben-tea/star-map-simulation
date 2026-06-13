@@ -1,17 +1,22 @@
 import "./style.css"
-import * as THREE from "three";
-import { scene, camera, renderer, controls } from "./assets/scene";
-import { starField, material } from "./assets/stars";
+import {scene, camera, renderer, controls} from "./assets/scene";
+import {starField, selectStar} from "./celestial/stars/starRendering";
+import {displayInfo, textbox} from "./ui/starInfo";
+import {getSelectedStarIndex} from "./selection/selectionManager";
 
 scene.add(starField);
 let isDragging = false;
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-raycaster.params.Points.threshold = 2;
 
-//doesnt count dragging as clicking
+//helper function to display star info
+function showStarInfo(index: number,x: number,y: number) {
+    displayInfo(index, x, y);
+    textbox.style.display = "block";
+}
+
+//manages when dragging
 controls.addEventListener("start", () => {
   isDragging = false;
+  textbox.style.display = "none";
 });
 
 controls.addEventListener("change", () => {
@@ -20,18 +25,14 @@ controls.addEventListener("change", () => {
 
 //checks if clicks star
 window.addEventListener("click", (event) => {
-  if (isDragging) return;
+    if (isDragging) return;
 
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    const selectedIndex = getSelectedStarIndex(event, camera, starField);
 
-  raycaster.setFromCamera(mouse, camera);
+    if (selectedIndex === undefined) return;
 
-  const intersection = raycaster.intersectObject(starField);
-
-  if (intersection.length > 0){
-    material.uniforms.selectedIndex.value = intersection[0]?.index;
-  }
+    selectStar(selectedIndex);
+    showStarInfo(selectedIndex,event.clientX,event.clientY);
 });
 
 

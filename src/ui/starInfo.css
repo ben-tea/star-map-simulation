@@ -1,0 +1,107 @@
+/* --- Card Structure --- */
+:root{
+  --bg-color: #0d0d0d;
+  --primary-color: #00f2ea;
+  --secondary-color: #a855f7;
+  --text-color: #e5e5e5;
+  --font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
+  --glitch-anim-duration: 0.5s;
+}
+
+.glitch-card {
+  position: fixed;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  width: 100%;
+  max-width: 250px;
+  border: 1px solid rgba(0, 242, 234, 0.2);
+  box-shadow:
+    0 0 20px rgba(0, 242, 234, 0.1),
+    inset 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  margin: 1rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.5em 1em;
+  border-bottom: 1px solid rgba(0, 242, 234, 0.2);
+}
+
+.card-title {
+  color: var(--primary-color);
+  font-size: .9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.card-text {
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding-bottom: 1rem;
+}
+
+.card-text svg {
+  width: 1.2em;
+  height: 1.2em;
+  stroke: var(--primary-color);
+}
+
+.card-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #333;
+  margin-left: 5px;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+
+/* --- Button Styling --- */
+.submit-btn {
+  width: 100%;
+  padding: 0.8em;
+  margin-top: 1rem;
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 25px var(--primary-color);
+  outline: none;
+}
+
+.submit-btn:active {
+  transform: scale(0.97);
+}
+
