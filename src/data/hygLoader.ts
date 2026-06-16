@@ -3,18 +3,26 @@ import raw from "./hyg/hygdata_v41.csv?raw";
 
 type HYGRow = {
   proper?: string;
+  hip?: number;
   ra?: number;
   dec?: number;
   mag?: number;
-  hip?: number;
-};
+  absmag?: number;
+  dist?: number;
+  spect?: string;
+  con?: string;
+  };
 
 export type Star = {
   name: string;
+  hip?: number;
   ra: number;
   dec: number;
   magnitude: number;
-  hip?: number;
+  absmag: number;
+  dist: number;
+  spect: string;
+  con: string;
 };
 
 const parsed = Papa.parse<HYGRow>(raw, {
@@ -35,8 +43,11 @@ export const stars: Star[] = parsed.data
   .filter((s) => s.mag <= MAX_MAG)
   .map((s) => ({
     name: s.proper ?? `HIP ${s.hip}`,
-
     ra: s.ra * 15,
     dec: s.dec,
     magnitude: s.mag,
+    absmag: s.absmag,
+    dist: s.dist,
+    spect: s.spect,
+    con: s.con
   }));
