@@ -21,7 +21,7 @@ export type Star = {
   magnitude: number;
   absmag: number;
   dist: number;
-  spect: string;
+  spectral: string;
   con: string;
 };
 
@@ -38,7 +38,8 @@ export const stars: Star[] = parsed.data
     (s): s is Required<HYGRow> =>
       s.ra != null &&
       s.dec != null &&
-      s.mag != null
+      s.mag != null &&
+      s.spect != null
   )
   .filter((s) => s.mag <= MAX_MAG)
   .map((s) => ({
@@ -48,6 +49,6 @@ export const stars: Star[] = parsed.data
     magnitude: s.mag,
     absmag: s.absmag,
     dist: s.dist,
-    spect: s.spect,
+    spectral: s.spect,
     con: s.con
   }));

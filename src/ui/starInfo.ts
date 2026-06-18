@@ -65,7 +65,7 @@ export function displayInfo(i: number, x: number, y: number){
     textDec.textContent = `Dec: ${star["dec"].toFixed(3)}°`;
     textMagnitude.textContent = `Magnitude: ${star["magnitude"].toFixed(3)}`;
     textAbsMag.textContent = `Abs. Magnitude: ${star["absmag"].toFixed(3)}`;
-    textSpectral.textContent = `Spectral Class: ${star["spect"]}`;
+    textSpectral.textContent = `Spectral Class: ${star["spectral"]}`;
     textDistance.textContent = `Distance: ${(star["dist"] * 3.262).toFixed(3)} ly`;
     textbox.style.top = String(y) + "px";
     textbox.style.left = String(x) + "px";

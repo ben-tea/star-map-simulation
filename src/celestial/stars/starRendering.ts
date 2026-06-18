@@ -23,12 +23,24 @@ function magToBrightness(mag: number) {
   return Math.min(Math.max(t, 0.02), 1.0);
 }
 
+function spectralToColor(char: string, spectralClass: number[]){ 
+  if (char == 'O')spectralClass.push(69/255, 153/255, 255/255);
+  else if(char == 'B') spectralClass.push(155/255, 227/255, 255/255);
+  else if(char == 'A') spectralClass.push(205/255, 241/255, 255/255);
+  else if(char == 'F') spectralClass.push(255/255, 255/255, 255/255);
+  else if(char == 'G') spectralClass.push(250/255, 255/255, 173/255);
+  else if(char == 'K') spectralClass.push(255/255, 207/255, 55/255);
+  else spectralClass.push(255/255, 75/255, 55/255);
+  }
+
+
 const geometry = new THREE.BufferGeometry();
 const skyRadius = 100;
 
 const positions: number[] = [];
 const brightnessLevels: number[] = [];
 const starIndex: number[] = [];
+const spectralClass: number[] = [];
 
 //takes all star data and adds to geometry
 for (let i = 0; i < starData.length; i++) {
@@ -38,8 +50,9 @@ for (let i = 0; i < starData.length; i++) {
   positions.push(pos.x, pos.y, pos.z);
   brightnessLevels.push(magToBrightness(star.magnitude));
   starIndex.push(i);
+  spectralToColor(star.spectral[0], spectralClass);
+  
 }
-
 geometry.setAttribute(
   "position",
   new THREE.BufferAttribute(new Float32Array(positions), 3)
@@ -53,6 +66,11 @@ geometry.setAttribute(
 geometry.setAttribute(
   "starIndex",
   new THREE.BufferAttribute(new Float32Array(starIndex), 1)
+)
+
+geometry.setAttribute(
+  "color",
+  new THREE.BufferAttribute(new Float32Array(spectralClass), 3)
 )
 
 export const starField = new THREE.Points(geometry, material);
