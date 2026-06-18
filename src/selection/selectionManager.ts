@@ -4,7 +4,7 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 //how far from vector before clicks register
-raycaster.params.Points.threshold = 2;
+raycaster.params.Points.threshold = 1.25;
 
 //returns star index from mouse position
 export function getSelectedStarIndex(

@@ -9,14 +9,15 @@ let isDragging = false;
 
 //helper function to display star info
 function showStarInfo(index: number,x: number,y: number) {
-    displayInfo(index, x, y);
     textbox.style.display = "block";
+    displayInfo(index, x, y);
 }
 
 //manages when dragging
 controls.addEventListener("start", () => {
   isDragging = false;
   textbox.style.display = "none";
+  selectStar(-1);
 });
 
 controls.addEventListener("change", () => {
@@ -26,11 +27,15 @@ controls.addEventListener("change", () => {
 //checks if clicks star
 window.addEventListener("click", (event) => {
     if (isDragging) return;
-
+    if(event.target instanceof Node){
+          if (textbox.contains(event.target)) return;
+        }
+    
     const selectedIndex = getSelectedStarIndex(event, camera, starField);
 
     if (selectedIndex === undefined) return;
-
+    
+    
     selectStar(selectedIndex);
     showStarInfo(selectedIndex,event.clientX,event.clientY);
 });
@@ -39,7 +44,6 @@ window.addEventListener("click", (event) => {
 
 function animate() {
   requestAnimationFrame(animate);
-
   controls.update();
   renderer.render(scene, camera);
 }

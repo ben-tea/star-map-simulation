@@ -67,7 +67,18 @@ export function displayInfo(i: number, x: number, y: number){
     textAbsMag.textContent = `Abs. Magnitude: ${star["absmag"].toFixed(3)}`;
     textSpectral.textContent = `Spectral Class: ${star["spectral"]}`;
     textDistance.textContent = `Distance: ${(star["dist"] * 3.262).toFixed(3)} ly`;
-    textbox.style.top = String(y) + "px";
-    textbox.style.left = String(x) + "px";
+
+    //ensures textbox is in frame
+    const rect = textbox.getBoundingClientRect();
+    if(y + rect.height > window.innerHeight)
+      {textbox.style.top = String(y - rect.height - 30) + "px";}
+    else 
+      {textbox.style.top = String(y) + "px";}
+
+    if(x + rect.width > window.innerWidth)
+      {textbox.style.left = String(x - rect.width - 35) + "px";}
+    else
+      {textbox.style.left = String(x) + "px";}
+    
 }
 

@@ -24,13 +24,13 @@ function magToBrightness(mag: number) {
 }
 
 function spectralToColor(char: string, spectralClass: number[]){ 
-  if (char == 'O')spectralClass.push(69/255, 153/255, 255/255);
-  else if(char == 'B') spectralClass.push(155/255, 227/255, 255/255);
-  else if(char == 'A') spectralClass.push(205/255, 241/255, 255/255);
-  else if(char == 'F') spectralClass.push(255/255, 255/255, 255/255);
-  else if(char == 'G') spectralClass.push(250/255, 255/255, 173/255);
-  else if(char == 'K') spectralClass.push(255/255, 207/255, 55/255);
-  else spectralClass.push(255/255, 75/255, 55/255);
+  if (char == 'O')spectralClass.push(0.27, 0.60, 1);
+  else if(char == 'B') spectralClass.push(0.61, 0.89, 1);
+  else if(char == 'A') spectralClass.push(0.80, 0.95, 1);
+  else if(char == 'F') spectralClass.push(1, 1, 1);
+  else if(char == 'G') spectralClass.push(0.98, 1, 0.68);
+  else if(char == 'K') spectralClass.push(1, 0.81, 0.21);
+  else spectralClass.push(1, 0.29, 0.22);
   }
 
 
