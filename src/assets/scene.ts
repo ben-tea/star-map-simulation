@@ -3,6 +3,7 @@ import { OrbitControls } from "three-stdlib";
 
 export const scene = new THREE.Scene();
 
+
 export const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -17,6 +18,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 export const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableZoom = false;
+controls.enablePan = false;
 
 // resize handling
 window.addEventListener("resize", () => {
@@ -25,3 +28,4 @@ window.addEventListener("resize", () => {
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
+

@@ -7,6 +7,10 @@ export function selectStar(index: number){
   material.uniforms.selectedIndex.value = index;
 }
 
+export function hoveredStar(index: number){
+  material.uniforms.hoveredIndex.value = index;
+}
+
 function magToBrightness(mag: number) {
   const minMag = -1;
   const maxMag = 5;
@@ -18,7 +22,7 @@ function magToBrightness(mag: number) {
   const brightMin = Math.pow(2.5, -maxMag);
 
   let t = (brightness - brightMin) / (brightMax - brightMin);
-  t = Math.pow(t, 0.35);
+  t = Math.pow(t, 0.18);
 
   return Math.min(Math.max(t, 0.02), 1.0);
 }
