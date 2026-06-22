@@ -11,6 +11,10 @@ export function hoveredStar(index: number){
   material.uniforms.hoveredIndex.value = index;
 }
 
+export function fovSizeChange(fov: number){
+  material.uniforms.fovMultiplier.value = 1 + 0.3 * ((75/fov) -1)
+}
+
 function magToBrightness(mag: number) {
   const minMag = -1;
   const maxMag = 5;

@@ -1,6 +1,6 @@
 import "./style.css"
 import {scene, camera, renderer, controls} from "./assets/scene";
-import {starField, selectStar, hoveredStar} from "./celestial/stars/starRendering";
+import {starField, selectStar, hoveredStar, fovSizeChange} from "./celestial/stars/starRendering";
 import {displayInfo, textbox} from "./ui/starInfo";
 import {getSelectedStarIndex} from "./selection/selectionManager";
 
@@ -45,6 +45,22 @@ window.addEventListener("click", (event) => {
     selectStar(selectIndex);
     showStarInfo(selectIndex,event.clientX,event.clientY);
 });
+
+//controls zooming
+window.addEventListener("wheel", (event)=> {
+  if (event.deltaY > 0) {camera.fov += 2;} 
+  else if (event.deltaY < 0) {camera.fov -=2;}
+
+  if (camera.fov > 80){
+    camera.fov = 80;
+    return;
+  }else if (camera.fov < 10){
+    camera.fov = 10;
+    return;
+  }
+  camera.updateProjectionMatrix();
+  fovSizeChange(camera.fov);
+})
 
 
 

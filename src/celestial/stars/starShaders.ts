@@ -3,7 +3,8 @@ import * as THREE from "three";
 export const material = new THREE.ShaderMaterial({
   uniforms: {
     selectedIndex: {value : -1},
-    hoveredIndex: {value : -1}
+    hoveredIndex: {value : -1},
+    fovMultiplier: {value: 1}
   },
   vertexShader: `
     attribute float starIndex;
@@ -13,6 +14,7 @@ export const material = new THREE.ShaderMaterial({
     attribute vec3 color;
     varying vec3 vColor;
     uniform float hoveredIndex;
+    uniform float fovMultiplier;
     
     
 
@@ -26,7 +28,7 @@ export const material = new THREE.ShaderMaterial({
       if (abs(starIndex - selectedIndex) < 0.1){ size = size * 2.5; }
       else if (abs(starIndex - hoveredIndex) < 0.1){ size = size * 2.0; }
 
-      gl_PointSize = size;
+      gl_PointSize = size * fovMultiplier;
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       
     }
