@@ -1,6 +1,6 @@
 import "./style.css"
-import {scene, camera, renderer, controls} from "./assets/scene";
-import {starField, selectStar, hoveredStar, fovSizeChange} from "./celestial/stars/starRendering";
+import {scene, camera, renderer, controls, timer} from "./assets/scene";
+import {starField, selectStarUniform, hoveredStarUniform, fovSizeUniform, timeUniform} from "./celestial/stars/starRendering";
 import {displayInfo, textbox} from "./ui/starInfo";
 import {getSelectedStarIndex} from "./selection/selectionManager";
 
@@ -18,48 +18,48 @@ function showStarInfo(index: number,x: number,y: number) {
 controls.addEventListener("start", () => {
   isDragging = false;
   textbox.style.display = "none";
-  selectStar(-1);
+  selectStarUniform(-1);
 });
 
 controls.addEventListener("change", () => {
   isDragging = true;
 });
 
-//highlights star that cursor hovers
+//hover function
 window.addEventListener("mousemove", (event)=>{
   selectIndex = getSelectedStarIndex(event, camera, starField);
   if (selectIndex === undefined) {
-      hoveredStar(-1); 
+      hoveredStarUniform(-1); 
       return;
     }
-  hoveredStar(selectIndex);
+  hoveredStarUniform(selectIndex);
 })
 
-//checks if clicks star
+//click function
 window.addEventListener("click", (event) => {
     if (isDragging) return;
     if(event.target instanceof Node){ if (textbox.contains(event.target)) return; }
     
     if (selectIndex === undefined) return;
     
-    selectStar(selectIndex);
+    selectStarUniform(selectIndex);
     showStarInfo(selectIndex,event.clientX,event.clientY);
 });
 
 //controls zooming
 window.addEventListener("wheel", (event)=> {
-  if (event.deltaY > 0) {camera.fov += 2;} 
-  else if (event.deltaY < 0) {camera.fov -=2;}
+  if (event.deltaY > 0) {camera.fov += 2.5;} 
+  else if (event.deltaY < 0) {camera.fov -=2.5;}
 
-  if (camera.fov > 80){
-    camera.fov = 80;
+  if (camera.fov > 75){
+    camera.fov = 75;
     return;
   }else if (camera.fov < 10){
     camera.fov = 10;
     return;
   }
   camera.updateProjectionMatrix();
-  fovSizeChange(camera.fov);
+  fovSizeUniform(camera.fov);
 })
 
 
@@ -68,6 +68,8 @@ function animate() {
   requestAnimationFrame(animate);
   controls.update();
   renderer.render(scene, camera);
+  timer.update();
+  timeUniform(timer.getElapsed());
 }
 
 

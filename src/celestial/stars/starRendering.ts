@@ -3,16 +3,18 @@ import { stars as starData } from "../../data/hygLoader.ts";
 import { material} from "./starShaders"
 import { raDectoPosition } from "../../assets/calculations";
 
-export function selectStar(index: number){
+//uniform variable functions
+export function selectStarUniform(index: number){
   material.uniforms.selectedIndex.value = index;
 }
-
-export function hoveredStar(index: number){
+export function hoveredStarUniform(index: number){
   material.uniforms.hoveredIndex.value = index;
 }
-
-export function fovSizeChange(fov: number){
-  material.uniforms.fovMultiplier.value = 1 + 0.3 * ((75/fov) -1)
+export function fovSizeUniform(fov: number){
+  material.uniforms.fovMultiplier.value = 1 + 0.3 * ((75/fov) - 1)
+}
+export function timeUniform(time: number){
+  material.uniforms.time.value = time;
 }
 
 function magToBrightness(mag: number) {
@@ -61,6 +63,9 @@ for (let i = 0; i < starData.length; i++) {
   spectralToColor(star.spectral[0], spectralClass);
   
 }
+
+
+//shader attributes
 geometry.setAttribute(
   "position",
   new THREE.BufferAttribute(new Float32Array(positions), 3)

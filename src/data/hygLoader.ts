@@ -46,6 +46,7 @@ export const stars: Star[] = parsed.data
       s.spect != null
   )
   .filter((s) => s.mag <= MAX_MAG)
+  .filter((s) => s.proper !== "Sol")
   .map((s) => ({
     name: 
       s.proper

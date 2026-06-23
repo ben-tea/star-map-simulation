@@ -41,6 +41,7 @@
   align-items: center;
   gap: 0.5em;
   cursor: default;
+  max-width: 200px;
 }
 
 .card-text {

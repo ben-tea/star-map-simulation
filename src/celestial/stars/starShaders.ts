@@ -4,7 +4,8 @@ export const material = new THREE.ShaderMaterial({
   uniforms: {
     selectedIndex: {value : -1},
     hoveredIndex: {value : -1},
-    fovMultiplier: {value: 1}
+    fovMultiplier: {value: 1},
+    time: {value : 0}
   },
   vertexShader: `
     attribute float starIndex;
@@ -15,11 +16,13 @@ export const material = new THREE.ShaderMaterial({
     varying vec3 vColor;
     uniform float hoveredIndex;
     uniform float fovMultiplier;
+    uniform float time;
     
     
 
     void main() {
-      vBrightness = brightness;
+      float twinkleOffset = 0.6 + 0.8 * (sin(time * sin(starIndex/4.0) +1.0 + starIndex * 0.371)+1.0)/2.0;
+      vBrightness = brightness * twinkleOffset;
       vColor = color;
 
       float b = max(vBrightness, 0.15);
