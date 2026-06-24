@@ -9,7 +9,6 @@
 }
 
 .glitch-card {
-  position: fixed;
   font-family: var(--font-family);
   background-color: var(--bg-color);
   width: 100%;
@@ -31,7 +30,7 @@
   border-bottom: 1px solid rgba(0, 242, 234, 0.2);
 }
 
-.card-title {
+.title {
   color: var(--primary-color);
   font-size: .9rem;
   font-weight: 700;
@@ -63,7 +62,7 @@
   stroke: var(--primary-color);
 }
 
-.card-dots span {
+.dots span {
   display: inline-block;
   width: 8px;
   height: 8px;
