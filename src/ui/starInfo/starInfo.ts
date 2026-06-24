@@ -2,9 +2,10 @@ import { stars as starData } from "../../data/hygLoader.ts";
 import "./starInfo.css";
 import html from "./starInfo.html?raw";
 
-export const textbox = document.createElement("div");
-textbox.innerHTML = html;
-textbox.style.position = "fixed";
+const template = document.createElement("div");
+template.innerHTML = html;
+
+export const textbox = template.firstElementChild as HTMLElement;
 document.body.appendChild(textbox);
 
 export function displayInfo(i: number, x: number, y: number){

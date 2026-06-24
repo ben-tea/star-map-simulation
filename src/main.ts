@@ -1,4 +1,4 @@
-import "./style.css"
+import "./ui/global.css"
 import {scene, camera, renderer, controls, timer} from "./assets/scene";
 import {starField, selectStarUniform, hoveredStarUniform, fovSizeUniform, timeUniform} from "./celestial/stars/starRendering";
 import {displayInfo, textbox} from "./ui/starInfo/starInfo";

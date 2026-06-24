@@ -1,14 +1,6 @@
-/* --- Card Structure --- */
-:root{
-  --bg-color: #0d0d0d;
-  --primary-color: #00f2ea;
-  --secondary-color: #a855f7;
-  --text-color: #e5e5e5;
-  --font-family: "Fira Code", Consolas, "Courier New", Courier, monospace;
-  --glitch-anim-duration: 0.5s;
-}
-
+/* --- Card Styling --- */
 .glitch-card {
+  position: fixed;
   font-family: var(--font-family);
   background-color: var(--bg-color);
   width: 100%;
@@ -19,6 +11,7 @@
     inset 0 0 10px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   margin: 1rem;
+  cursor:default;
 }
 
 .card-header {
@@ -30,7 +23,7 @@
   border-bottom: 1px solid rgba(0, 242, 234, 0.2);
 }
 
-.title {
+.card-title {
   color: var(--primary-color);
   font-size: .9rem;
   font-weight: 700;
@@ -39,12 +32,11 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
-  cursor: default;
   max-width: 200px;
 }
 
 .card-text {
-  color: var(--primary-color);
+  color: var(--text-color);
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -53,7 +45,6 @@
   align-items: center;
   gap: 0.5em;
   padding-bottom: 1rem;
-  cursor: default;
 }
 
 .card-text svg {
@@ -62,7 +53,7 @@
   stroke: var(--primary-color);
 }
 
-.dots span {
+.card-dots span {
   display: inline-block;
   width: 8px;
   height: 8px;
