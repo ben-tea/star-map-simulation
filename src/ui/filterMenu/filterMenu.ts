@@ -4,7 +4,7 @@ import "./filterMenu.css";
 const template = document.createElement("div");
 template.innerHTML = html;
 
-const filterMenu = template.firstElementChild as HTMLElement;
+export const filterMenu = template.firstElementChild as HTMLElement;
 document.body.appendChild(filterMenu);
 
 let collapsed = false;

@@ -2,8 +2,7 @@ import "./ui/global.css"
 import {scene, camera, renderer, controls, timer} from "./assets/scene";
 import {starField, selectStarUniform, hoveredStarUniform, fovSizeUniform, timeUniform} from "./celestial/stars/starRendering";
 import {displayInfo, textbox} from "./ui/starInfo/starInfo";
-import {getSelectedStarIndex} from "./selection/selectionManager";
-import "./ui/filterMenu/filterMenu"
+import {checkOverlap, getSelectedStarIndex} from "./selection/selectionManager";
 
 scene.add(starField);
 let isDragging = false;
@@ -30,16 +29,20 @@ controls.addEventListener("change", () => {
 window.addEventListener("mousemove", (event)=>{
   selectIndex = getSelectedStarIndex(event, camera, starField);
   if (selectIndex === undefined) {
-      hoveredStarUniform(-1); 
-      return;
+    hoveredStarUniform(-1); 
+    return;
     }
+
+  if(event.target instanceof Node){if(checkOverlap(event.target)){return;}}
+
   hoveredStarUniform(selectIndex);
 })
 
 //click function
 window.addEventListener("click", (event) => {
     if (isDragging) return;
-    if(event.target instanceof Node){ if (textbox.contains(event.target)) return; }
+
+    if(event.target instanceof Node){if(checkOverlap(event.target)){return;}}
     
     if (selectIndex === undefined) return;
     

@@ -23,3 +23,11 @@ export function getSelectedStarIndex(event: MouseEvent, camera: THREE.Camera, st
     }
     return closest.index;
 }
+
+import {textbox} from '../ui/starInfo/starInfo';
+import {filterMenu} from '../ui/filterMenu/filterMenu';
+
+export function checkOverlap(eventTarget: Node){
+          if (textbox.contains(eventTarget)) return true; 
+          if (filterMenu.contains(eventTarget)) return true;
+}
