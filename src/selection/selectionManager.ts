@@ -1,4 +1,7 @@
 import * as THREE from "three";
+import {textbox} from '../ui/starInfo/starInfo';
+import {filterMenu} from '../ui/filterMenu/filterMenu';
+
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -24,8 +27,6 @@ export function getSelectedStarIndex(event: MouseEvent, camera: THREE.Camera, st
     return closest.index;
 }
 
-import {textbox} from '../ui/starInfo/starInfo';
-import {filterMenu} from '../ui/filterMenu/filterMenu';
 
 export function checkOverlap(eventTarget: Node){
           if (textbox.contains(eventTarget)) return true; 

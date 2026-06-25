@@ -41,10 +41,10 @@ window.addEventListener("mousemove", (event)=>{
 //click function
 window.addEventListener("click", (event) => {
     if (isDragging) return;
-
+    if (selectIndex === undefined) return;
+    
     if(event.target instanceof Node){if(checkOverlap(event.target)){return;}}
     
-    if (selectIndex === undefined) return;
     
     selectStarUniform(selectIndex);
     showStarInfo(selectIndex,event.clientX,event.clientY);
