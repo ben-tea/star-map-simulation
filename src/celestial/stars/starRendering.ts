@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { stars as starData } from "../../data/hygLoader.ts";
+import { stars as starData } from "../../../data/hygLoader.ts";
 import { material} from "./starShaders"
 import { raDectoPosition } from "../../assets/calculations";
 

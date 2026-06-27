@@ -6,8 +6,6 @@ Simbad.add_votable_fields("sp_type")
 
 os.makedirs("cache", exist_ok=True)
 
-print(Simbad.query_object("Sirius")["ids"][0])
-
 def convert_simbad(result):
     return {
         "id_raw": result["ids"][0],
@@ -30,7 +28,7 @@ def get_cache(source_id):
 def get_star(source_id):
     cached = get_cache(source_id)
     if cached is not None:
-        return cached
+        return cached   
     
     result = Simbad.query_object(f"Gaia DR3 {source_id}")
     if result is None: 

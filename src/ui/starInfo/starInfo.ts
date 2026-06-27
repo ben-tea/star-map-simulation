@@ -1,4 +1,4 @@
-import { stars as starData } from "../../data/hygLoader.ts";
+import { stars as starData } from "../../../data/hygLoader.ts";
 import "./starInfo.css";
 import html from "./starInfo.html?raw";
 
