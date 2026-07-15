@@ -1,5 +1,4 @@
 import csv
-from tools.simbad.pipeline import get_star
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -26,17 +25,13 @@ for i in range(0,len(rows), batch_size):
     batch = rows[i: i + batch_size]
     for row in batch:
         source_id = id_parser(row['source_id'])
-        simbad_data = get_star(source_id)
-
-        if simbad_data is None: continue
 
         star = {
             'source_id': source_id,
-            'name': simbad_data['name'],
+
             'ra': float_parser(row['ra']),
             'dec': float_parser(row['dec']),
             'magnitude': float_parser(row['phot_g_mean_mag']),
-            'spectral': simbad_data['spectral'],
             'parallax': float_parser(row['parallax'])
             }
 
